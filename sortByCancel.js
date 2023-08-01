@@ -3,11 +3,12 @@ function sortByCancel(event) {
   var sheet = ss.getActiveSheet();
   var editedCell = sheet.getActiveCell();
 
-  var columnToSortBy = 4; // Cancel Date column
+  var sheetName = "PO Tracking"; // The name of the sheet you'd like this script to apply to.
+  var columnToSortBy = 4; // Column to sort by
   var tableRange = "A3:Z1000"; // Table excluding headers
 
   if (
-    sheet.getSheetName() == "PO Tracking" &&
+    sheet.getSheetName() == sheetName &&
     editedCell.getColumn() == columnToSortBy
   ) {
     var range = sheet.getRange(tableRange);
