@@ -8,15 +8,16 @@ function updateCalendar() {
   var eventsToSchedule = [];
 
   var lastRow = range.getLastRow();
-  var r = 4; // Excluding headers
+  var startRow = 4; // Excluding headers
 
   // Adding all the rows that have a name and date range.
-  while (r <= lastRow) {
+  while (startRow <= lastRow) {
     let event = {};
 
-    var nameValue = range.getCell(r, 2).getValue();
-    var startDateValue = range.getCell(r, 4).getValue();
-    var endDateValue = range.getCell(r, 5).getValue();
+    var nameValue = range.getCell(startRow, 2).getValue();
+    var startDateValue = range.getCell(startRow, 4).getValue();
+    var endDateValue = range.getCell(startRow, 5).getValue();
+    var locationValue = range.getCell(startRow, 10).getValue();
 
     if (nameValue != "" && startDateValue != "") {
       event.name = nameValue;
@@ -27,11 +28,15 @@ function updateCalendar() {
       event.end = endDateValue;
     }
 
+    if (locationValue != "") {
+      event.location = locationValue;
+    }
+
     if (Object.keys(event).length != 0) {
       eventsToSchedule.push(event);
     }
 
-    r++;
+    startRow++;
   }
 
   for (let i = 0; i < eventsToSchedule.length; i++) {
@@ -40,7 +45,8 @@ function updateCalendar() {
     var event = eventCal.createAllDayEvent(
       eventDetails.name,
       eventDetails.start,
-      eventDetails.end
+      eventDetails.end,
+      { location: eventDetails.location }
     );
 
     Logger.log("Event ID: " + event.getId());
