@@ -42,7 +42,10 @@ function updateCalendar() {
       event.push(endDateValue);
     }
 
-    eventsToSchedule.push(event);
+    if (event.length) {
+      eventsToSchedule.push(event);
+    }
+
     r++;
   }
 
