@@ -10,14 +10,18 @@ function updateCalendar() {
   var lastRow = range.getLastRow();
   var currentRow = 4; // Excluding headers
 
-  // Adding all the rows that have a name and date range.
+  // Data columns - change if column order changes
+  var eventNameCol = 2;
+  var startDateCol = 4;
+  var endDateCol = 5;
+
+  // Add all the rows that have a name and date range.
   while (currentRow <= lastRow) {
     let event = {};
 
-    var nameValue = range.getCell(currentRow, 2).getValue();
-    var startDateValue = range.getCell(currentRow, 4).getValue();
-    var endDateValue = range.getCell(currentRow, 5).getValue();
-    var locationValue = range.getCell(currentRow, 10).getValue();
+    var nameValue = range.getCell(currentRow, eventNameCol).getValue();
+    var startDateValue = range.getCell(currentRow, startDateCol).getValue();
+    var endDateValue = range.getCell(currentRow, endDateCol).getValue();
 
     if (nameValue != "" && startDateValue != "") {
       event.name = nameValue;
@@ -28,10 +32,6 @@ function updateCalendar() {
       event.end = endDateValue;
     }
 
-    if (locationValue != "") {
-      event.location = locationValue;
-    }
-
     if (Object.keys(event).length != 0) {
       eventsToSchedule.push(event);
     }
@@ -39,14 +39,14 @@ function updateCalendar() {
     currentRow++;
   }
 
+  // Create events in Google Calendar
   for (let i = 0; i < eventsToSchedule.length; i++) {
     const eventDetails = eventsToSchedule[i];
 
     var event = eventCal.createAllDayEvent(
       eventDetails.name,
       eventDetails.start,
-      eventDetails.end,
-      { location: eventDetails.location }
+      eventDetails.end
     );
 
     Logger.log("Event ID: " + event.getId());
