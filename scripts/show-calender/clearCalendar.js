@@ -1,6 +1,6 @@
 function clearCalendar() {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
-  var calendarId = spreadsheet.getRange("O1").getValue();
+  var calendarId = spreadsheet.getRange("L1").getValue();
   var eventCal = CalendarApp.getCalendarById(calendarId);
 
   var fromDate = new Date(2000, 0, 0, 0, 0, 0);
