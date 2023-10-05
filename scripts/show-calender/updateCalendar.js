@@ -2,7 +2,7 @@ function updateCalendar() {
   var spreadsheet = SpreadsheetApp.getActiveSpreadsheet();
   var sheet = spreadsheet.getActiveSheet();
   var range = sheet.getDataRange();
-  var calendarId = spreadsheet.getRange("O1").getValue();
+  var calendarId = spreadsheet.getRange("L1").getValue();
   var eventCal = CalendarApp.getCalendarById(calendarId);
 
   var eventsToSchedule = [];
