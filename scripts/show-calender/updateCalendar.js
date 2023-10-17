@@ -29,6 +29,7 @@ function updateCalendar() {
     }
 
     if (endDateValue != "" && endDateValue > startDateValue) {
+      endDateValue = new Date(endDateValue.getTime() + 24 * 60 * 60 * 1000);
       event.end = endDateValue;
     }
 
