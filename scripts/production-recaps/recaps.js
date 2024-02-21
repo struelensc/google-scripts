@@ -54,4 +54,36 @@ function createRecap(skuData, po, startDate, cancelDate) {
   cancelCell.setValue(cancelDate);
 
   // set sku data
+
+  skuData.forEach(logSkuData);
+}
+
+function logSkuData(value, key, map) {
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getActiveSheet();
+  let range = sheet.getDataRange();
+  let lastRow = range.getLastRow() + 1;
+
+  let skuCell = sheet.getRange(lastRow, 1);
+  skuCell.setValue(value.sku);
+
+  let colorCell = sheet.getRange(lastRow, 2);
+  colorCell.setValue(value.color);
+
+  let upcCell = sheet.getRange(lastRow, 3);
+  upcCell.setValue(key);
+
+  let shipAmountCell = sheet.getRange(lastRow, 4);
+  shipAmountCell.setValue(value.shipAmount);
+
+  sortRange();
+}
+
+function sortRange() {
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getActiveSheet();
+  let lastRow = sheet.getLastRow();
+  let range = sheet.getRange(7, 1, lastRow, 4);
+
+  range.sort(1);
 }
