@@ -7,6 +7,9 @@ function getSKUData() {
   let row = 2; //Excluding header
 
   let skuData = new Map();
+  let po = range.getCell(2, 1).getValue().split("-")[0];
+  let startDate = range.getCell(2, 8).getValue();
+  let cancelDate = range.getCell(2, 9).getValue();
 
   while (row <= lastRow) {
     let upc = range.getCell(row, 18).getValue();
@@ -30,5 +33,25 @@ function getSKUData() {
     row++;
   }
 
-  return skuData;
+  createRecap(skuData, po, startDate, cancelDate);
+}
+
+function createRecap(skuData, po, startDate, cancelDate) {
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let templateSheet = ss.getSheetByName("Recap Template");
+  ss.insertSheet(po, { template: templateSheet });
+  let sheet = ss.getActiveSheet();
+
+  // set PO
+  let poCell = sheet.getRange("B3");
+  poCell.setValue(po);
+
+  // set start and cancel
+  let startCell = sheet.getRange("D3");
+  startCell.setValue(startDate);
+
+  let cancelCell = sheet.getRange("D4");
+  cancelCell.setValue(cancelDate);
+
+  // set sku data
 }
