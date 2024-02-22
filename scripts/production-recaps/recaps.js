@@ -39,23 +39,24 @@ function getSKUData() {
 function createRecap(skuData, po, startDate, cancelDate) {
   let ss = SpreadsheetApp.getActiveSpreadsheet();
   let templateSheet = ss.getSheetByName("Recap Template");
-  ss.insertSheet(po, { template: templateSheet });
+  ss.insertSheet(po + "-RECAP", 0, { template: templateSheet });
   let sheet = ss.getActiveSheet();
 
   // set PO
   let poCell = sheet.getRange("B3");
   poCell.setValue(po);
 
-  // set start and cancel
+  // set start
   let startCell = sheet.getRange("D3");
   startCell.setValue(startDate);
 
+  // set start
   let cancelCell = sheet.getRange("D4");
   cancelCell.setValue(cancelDate);
 
   // set sku data
-
   skuData.forEach(logSkuData);
+  sortRange();
 }
 
 function logSkuData(value, key, map) {
@@ -75,8 +76,6 @@ function logSkuData(value, key, map) {
 
   let shipAmountCell = sheet.getRange(lastRow, 4);
   shipAmountCell.setValue(value.shipAmount);
-
-  sortRange();
 }
 
 function sortRange() {
@@ -86,4 +85,22 @@ function sortRange() {
   let range = sheet.getRange(7, 1, lastRow, 4);
 
   range.sort(1);
+  highlightAltRows(lastRow);
+}
+
+function highlightAltRows(lastRow) {
+  let ss = SpreadsheetApp.getActiveSpreadsheet();
+  let sheet = ss.getActiveSheet();
+
+  let row = 7;
+
+  while (row <= lastRow) {
+    let range = sheet.getRange(row, 1, 1, 4);
+
+    if (row % 2 != 0) {
+      range.setBackground("#efefef");
+    }
+
+    row++;
+  }
 }
