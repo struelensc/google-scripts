@@ -1,5 +1,13 @@
-function createRecap(skuData, po, startDate, cancelDate) {
+function createRecap() {
   let ss = SpreadsheetApp.getActiveSpreadsheet();
+
+  let poData = getPOData();
+  let po = poData["po"];
+  let startDate = poData["startDate"];
+  let cancelDate = poData["cancelDate"];
+
+  let skuData = getSkuData();
+
   let templateSheet = ss.getSheetByName("Recap Template");
   ss.insertSheet(po + "-RECAP", 0, { template: templateSheet });
   let sheet = ss.getActiveSheet();

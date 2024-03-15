@@ -1,4 +1,4 @@
-function getSKUData() {
+function getSkuData() {
   let ss = SpreadsheetApp.getActiveSpreadsheet();
   let sheet = ss.getActiveSheet();
   let range = sheet.getDataRange();
@@ -7,9 +7,6 @@ function getSKUData() {
   let row = 2; //Excluding header
 
   let skuData = new Map();
-  let po = range.getCell(2, 1).getValue().split("-")[0];
-  let startDate = range.getCell(2, 8).getValue();
-  let cancelDate = range.getCell(2, 9).getValue();
 
   while (row <= lastRow) {
     let upc = range.getCell(row, 18).getValue();
@@ -33,5 +30,5 @@ function getSKUData() {
     row++;
   }
 
-  createRecap(skuData, po, startDate, cancelDate);
+  return skuData;
 }
