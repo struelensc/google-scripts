@@ -6,7 +6,7 @@ function createRecap() {
   let startDate = poData["startDate"];
   let cancelDate = poData["cancelDate"];
 
-  let skuData = getSkuData();
+  let skuData = getSkuData("POST PO HERE");
 
   let templateSheet = ss.getSheetByName("Recap Template");
   ss.insertSheet(po + "-RECAP", 0, { template: templateSheet });

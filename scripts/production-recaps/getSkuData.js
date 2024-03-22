@@ -1,6 +1,6 @@
-function getSkuData() {
+function getSkuData(sheetName) {
   let ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getActiveSheet();
+  let sheet = ss.getSheetByName(sheetName);
   let range = sheet.getDataRange();
   let lastRow = range.getLastRow();
 
