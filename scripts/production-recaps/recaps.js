@@ -26,7 +26,9 @@ function createRecap() {
 
   // set sku data
   skuData.forEach(logSkuData);
-  sortRange();
+
+  sortRange(7, 4);
+  highlightAltRows(7, 4);
 }
 
 function logSkuData(value, key, map) {
@@ -46,31 +48,4 @@ function logSkuData(value, key, map) {
 
   let shipAmountCell = sheet.getRange(lastRow, 4);
   shipAmountCell.setValue(value.shipAmount);
-}
-
-function sortRange() {
-  let ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getActiveSheet();
-  let lastRow = sheet.getLastRow();
-  let range = sheet.getRange(7, 1, lastRow, 4);
-
-  range.sort(1);
-  highlightAltRows(lastRow);
-}
-
-function highlightAltRows(lastRow) {
-  let ss = SpreadsheetApp.getActiveSpreadsheet();
-  let sheet = ss.getActiveSheet();
-
-  let row = 7;
-
-  while (row <= lastRow) {
-    let range = sheet.getRange(row, 1, 1, 4);
-
-    if (row % 2 != 0) {
-      range.setBackground("#efefef");
-    }
-
-    row++;
-  }
 }

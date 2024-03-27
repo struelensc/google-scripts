@@ -13,15 +13,15 @@ function getStoreData(sheetName) {
     let sku = range.getCell(row, 21).getValue();
     let qty = range.getCell(row, 27).getValue();
 
-    const ponyQuantityToAdd = sku == "LI4563" ? qty : 0;
+    const tubeQuantityToAdd = sku == "LI4563" ? qty : 0;
 
     if (storeData.has(store) == false) {
-      storeData.set(store, { totalQty: qty, ponyQty: ponyQuantityToAdd });
+      storeData.set(store, { totalQty: qty, tubeQty: tubeQuantityToAdd });
     } else {
-      let newPonyQty = storeData.get(store).ponyQty + ponyQuantityToAdd;
+      let newtubeQty = storeData.get(store).tubeQty + tubeQuantityToAdd;
       let newTotalQty = storeData.get(store).totalQty + qty;
 
-      storeData.set(store, { totalQty: newTotalQty, ponyQty: newPonyQty });
+      storeData.set(store, { totalQty: newTotalQty, tubeQty: newtubeQty });
     }
 
     row++;
