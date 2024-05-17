@@ -5,17 +5,18 @@ function archiveOnEdit() {
   var lastRow = range.getLastRow();
   var rowsToArchive = [];
 
-  var r = 3; // Excluding headers
+  var rowToCheck = 3; // Excluding headers
+  let archiveButtonColumn = 9; // Column with archive checkbox
 
   // Adding all the rows that have been checked for archival to rowsToArchive array.
-  while (r <= lastRow) {
-    var cellValue = range.getCell(r, 8).getValue();
+  while (rowToCheck <= lastRow) {
+    var cellValue = range.getCell(rowToCheck, archiveButtonColumn).getValue();
 
     if (cellValue == true) {
-      rowsToArchive.push(r);
+      rowsToArchive.push(rowToCheck);
     }
 
-    r++;
+    rowToCheck++;
   }
 
   // If array isn't empty, move data to archive spreadsheet using rows collected in array.
@@ -35,8 +36,9 @@ function archiveOnEdit() {
         var targetRow = archiveSheet.getLastRow() + 1;
         var target = archiveSheet.getRange(targetRow, 1);
         var targetSecondary = archiveSheet.getRange(targetRow, 5);
-        sheet.getRange(row, 1, 1, 4).moveTo(target); //PO Info
-        sheet.getRange(row, 10, 1, 2).moveTo(targetSecondary); //PO Amount
+
+        sheet.getRange(row, 1, 1, 4).moveTo(target); // PO Info
+        sheet.getRange(row, 11, 1, 2).moveTo(targetSecondary); // PO Amount
         sheet.deleteRow(row);
       }
     }
