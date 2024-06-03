@@ -8,7 +8,7 @@ function createRecap() {
   let cancelDate = dataRange.getCell(2, 9).getValue();
 
   let templateSheet = ss.getSheetByName("Recap Template");
-  ss.insertSheet(po + "-RECAP", 0, { template: templateSheet });
+  ss.insertSheet("RECAP", 0, { template: templateSheet });
   let recapSheet = ss.getActiveSheet();
 
   let poCell = ss.getRange("B3");
@@ -27,9 +27,10 @@ function createRecap() {
   pivotTable.addRowGroup(22);
 
   let sum = SpreadsheetApp.PivotTableSummarizeFunction.SUM;
+  pivotTable.addPivotValue(29, sum);
+
   let filterCellsNotEmpty = SpreadsheetApp.newFilterCriteria()
     .whenCellNotEmpty()
     .build();
   pivotTable.addFilter(19, filterCellsNotEmpty);
-  pivotTable.addPivotValue(29, sum);
 }
