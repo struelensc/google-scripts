@@ -15,7 +15,7 @@ function highlightAltRows(topRow, lastColumn) {
 
   let row = topRow;
 
-  while (row <= lastRow) {
+  while (row <= lastRow - 1) {
     let range = sheet.getRange(row, 1, 1, lastColumn);
 
     if (row % 2 != 0) {

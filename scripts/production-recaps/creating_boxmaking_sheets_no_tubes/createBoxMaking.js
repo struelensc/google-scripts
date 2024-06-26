@@ -30,4 +30,6 @@ function createBoxMaking() {
 
   let sum = SpreadsheetApp.PivotTableSummarizeFunction.SUM;
   pivotTable.addPivotValue(27, sum);
+
+  highlightAltRows(8, 2);
 }
