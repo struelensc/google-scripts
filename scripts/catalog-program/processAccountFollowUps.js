@@ -5,17 +5,17 @@ function processAccountFollowUps() {
   var lastRow = range.getLastRow();
   var rowsToMove = [];
 
-  var r = 5; // Excluding headers
+  var row = 5; // Excluding headers
 
   // Adding all the rows that have been checked for archival to rowsToMove array.
-  while (r <= lastRow) {
-    var cellValue = range.getCell(r, 1).getValue();
+  while (row <= lastRow) {
+    var cellValue = range.getCell(row, 1).getValue();
 
     if (cellValue != "") {
-      rowsToMove.push(r);
+      rowsToMove.push(row);
     }
 
-    r++;
+    row++;
   }
 
   // If array isn't empty, move data to orders to follow up on spreadsheet using rows collected in array.
