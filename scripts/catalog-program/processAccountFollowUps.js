@@ -18,7 +18,7 @@ function processAccountFollowUps() {
     row++;
   }
 
-  // If array isn't empty, move data to orders to follow up on spreadsheet using rows collected in array.
+  // If array isn't empty, move data to accounts to follow up on spreadsheet using rows collected in array.
   if (rowsToMove.length > 0) {
     // Prompt for user approval before moving data.
     var ui = SpreadsheetApp.getUi();
