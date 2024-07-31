@@ -31,22 +31,24 @@ function processMailedCatalogs() {
     if (response == ui.Button.YES) {
       for (let i = 0; i < rowsToMove.length; i++) {
         var row = rowsToMove[i] - i;
-        var catalogFollowUpSheet = ss.getSheetByName("Catalog follow up");
 
+        var catalogFollowUpSheet = ss.getSheetByName("Catalog follow up");
         var targetRow = catalogFollowUpSheet.getLastRow() + 1;
 
-        var companyInfoTarget = catalogFollowUpSheet.getRange(targetRow, 4);
-        var emailTarget = catalogFollowUpSheet.getRange(targetRow, 8);
-        var phoneTarget = catalogFollowUpSheet.getRange(targetRow, 9);
+        var companyInfoTarget = catalogFollowUpSheet.getRange(targetRow, 6);
+        var emailTarget = catalogFollowUpSheet.getRange(targetRow, 10);
+        var phoneTarget = catalogFollowUpSheet.getRange(targetRow, 11);
 
-        sheet.getRange(row, 1, 1, 4).moveTo(companyInfoTarget); //Company info
-        sheet.getRange(row, 5).moveTo(emailTarget); //Email info
-        sheet.getRange(row, 12).moveTo(phoneTarget); //Phone mumber info
+        sheet.getRange(row, 1, 1, 4).copyTo(companyInfoTarget); //Company info
+        sheet.getRange(row, 5).copyTo(emailTarget); //Email info
+        sheet.getRange(row, 12).copyTo(phoneTarget); //Phone mumber info
 
-        catalogFollowUpSheet.getRange(targetRow, 3).setValue("0");
+        catalogFollowUpSheet.getRange(targetRow, 5).setValue("0");
 
         sheet.deleteRow(row);
       }
+
+      fixConditionalFormatting();
     }
   }
 }

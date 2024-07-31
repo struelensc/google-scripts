@@ -35,9 +35,11 @@ function processAccountFollowUps() {
 
         var targetRow = awaitingOrderSheet.getLastRow() + 1;
 
-        var target = awaitingOrderSheet.getRange(targetRow, 2);
+        var followUpTarget = awaitingOrderSheet.getRange(targetRow, 2);
+        var companyInfoTarget = awaitingOrderSheet.getRange(targetRow, 4);
 
-        sheet.getRange(row, 1, 1, 9).moveTo(target);
+        sheet.getRange(row, 1, 1, 2).copyTo(followUpTarget); //Last follow up details
+        sheet.getRange(row, 5, 1, 7).copyTo(companyInfoTarget);
 
         var FollowUpCounterValue = awaitingOrderSheet
           .getRange(targetRow, 4)
@@ -47,8 +49,6 @@ function processAccountFollowUps() {
         awaitingOrderSheet
           .getRange(targetRow, 4)
           .setValue(FollowUpCounterValue);
-
-        awaitingOrderSheet.getRange(targetRow, 5).clearFormat();
 
         sheet.deleteRow(row);
       }
